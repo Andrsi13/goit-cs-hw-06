@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb+srv://Andrsi:20041995aA@cluster0.2j3nyfz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - MONGO_DB=message_db
+      - MONGO_COLLECTION=messages
+
+  mongo:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
